@@ -15,9 +15,32 @@ import {
 } from "mdbreact";
 
 export default class NavBar extends React.Component {
-    state = {
-        isOpen: false
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false,
+            loggedIn: this.props.loggedIn
+        };
+    }
+
+    renderProfileDropdown() {
+        if (this.state.loggedIn) {
+            return (
+                <MDBDropdownMenu className="dropdown-default" right>
+                    <MDBDropdownItem href="#!">Profile</MDBDropdownItem>
+                    <MDBDropdownItem href="#!">Edit Profile</MDBDropdownItem>
+                    <MDBDropdownItem href="#!">Logout</MDBDropdownItem>
+                </MDBDropdownMenu>
+            );
+        } else {
+            return (
+                <MDBDropdownMenu className="dropdown-default" right>
+                    <MDBDropdownItem href="#!">Login</MDBDropdownItem>
+                    <MDBDropdownItem onClick={() => console.log("Whats up")} href="#!">SignUp</MDBDropdownItem>
+                </MDBDropdownMenu>
+            );
+        }
+    }
 
     toggleCollapse = () => {
         this.setState({ isOpen: !this.state.isOpen });
@@ -48,12 +71,7 @@ export default class NavBar extends React.Component {
                                 <MDBDropdownToggle nav caret>
                                     <MDBIcon icon="user" />
                                 </MDBDropdownToggle>
-                                <MDBDropdownMenu className="dropdown-default" right>
-                                    <MDBDropdownItem href="#!">Action</MDBDropdownItem>
-                                    <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
-                                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-                                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-                                </MDBDropdownMenu>
+                                {this.renderProfileDropdown()}
                             </MDBDropdown>
                         </MDBNavItem>
                     </MDBNavbarNav>

@@ -2,7 +2,10 @@ import React from "react";
 import { Row, Column } from "simple-flexbox";
 import { MDBContainer, MDBJumbotron } from "mdbreact";
 
+import "../styling/LatestGamesPage.css"
+
 import DataTable from "./DataTable";
+import FilterPanel from "./FilterPanel"
 import GamesTable from "./GamesTable";
 
 export default class LatestGamesPage extends React.Component {
@@ -12,8 +15,8 @@ export default class LatestGamesPage extends React.Component {
 
     render() {
         return (
-            <MDBContainer fluid>
-                <MDBJumbotron fluid>
+            <MDBContainer className="LatestGamesPage" fluid>
+                <MDBJumbotron className="jumbotron" fluid>
                     <MDBContainer fluid>
                         <h2 className="display-4">Fluid jumbotron</h2>
                         <p className="lead">
@@ -23,8 +26,10 @@ export default class LatestGamesPage extends React.Component {
                     </MDBContainer>
                 </MDBJumbotron>
                 <Row>
-                    <Column style={{ flex: 1 }}>Hello</Column>
-                    <Column style={{ flex: 2, margin: "20px 30px 20px 20px " }}>
+                    <Column className="filterBorder" style={{ flex: 1 }}>
+                        <FilterPanel/>
+                    </Column>
+                    <Column className="tableBorder" style={{ flex: 2}}>
                         <DataTable />
                     </Column>
                 </Row>
